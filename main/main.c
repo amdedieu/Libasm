@@ -6,13 +6,13 @@
 /*   By: amdedieu <amdedieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:21:31 by amdedieu          #+#    #+#             */
-/*   Updated: 2021/03/08 21:26:57 by amdedieu         ###   ########.fr       */
+/*   Updated: 2021/03/10 14:22:03 by amdedieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libasm.h"
 
-void            check_ft_strcmp()
+/*void            check_ft_strcmp()
 {
     char        *s1;
     char        *s2;
@@ -56,13 +56,45 @@ void            check_ft_strcmp()
     printf("ft_strcmp: %d\n\n", ft_strcmp("", ""));
 
     printf("\n\t\t ----- END -----\n\n");
+}*/
+
+void			check_ft_write()
+{
+	int ret;
+	int ft_ret;
+	char *str;
+
+	printf("\n\t\t ----- FT_WRITE -----\n\n");
+	str = "Bonsoir a toute et a tous";
+	printf("string : '%s'\n", str);
+	ret = write(1, str, ft_strlen(str));
+	printf(":    write returned : %d\n", ret);
+	ft_ret = ft_write(1, str, ft_strlen(str));
+	printf(": ft_write returned : %d\n\n", ft_ret);
+
+	str = "";
+	printf("string : '%s'\n", str);
+	ret = write(1, str, ft_strlen(str));
+	printf(":    write returned : %d\n", ret);
+	ft_ret = ft_write(1, str, ft_strlen(str));
+	printf(": ft_write returned : %d\n\n", ft_ret);
+
+	printf("--> Error with bad fd\n");	
+	str = "Ceci est un test";
+	printf("string : '%s'\n", str);
+	errno = 0;
+	ret = write(489, str, ft_strlen(str));
+	printf(":    write returned : %d : %s -> %d\n", ret, strerror(errno), errno);
+	errno = 0;	
+	ft_ret = ft_write(489, str, ft_strlen(str));
+	printf(": ft_write returned : %d : %s -> %d\n\n", ft_ret, strerror(errno), errno);
+	
+	printf("\n\t\t ----- END -----\n\n");
 }
 
 int		main(void)
 {
-	char  *str= "couco";
-	char  *str1 = "coucou";
-	check_ft_strcmp();
+	check_ft_write();
 	//printf("%d\n", ft_strcmp(str, str1));
 	//printf("original : %d\n", strcmp(str, str1));
 	return 0;
